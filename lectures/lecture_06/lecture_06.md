@@ -92,8 +92,6 @@ import doctest
 
 Чаще  всего элементы данных в массивах имеют постоянный размер, что позволяет с легкостью найти любой элемент по его индексу (или адресу), начинающимуся либо с 0, либо с 1. 
 
-Фиксированный начальный размер и индексация, основанная на 0, могут быть объединены следующим образом.
-
 Чаще всего, массив массив представляет собой основную структуру данных смежного типа. 
 
 ![](img/array.png)
@@ -104,20 +102,20 @@ import doctest
 
 Игнорируя размер, массив можно рассматривать как абстрактный тип данных, который поддерживает следующие операции:
 
-- **`init(Integer capacity) -> Array`**
-<br>Возвращает пустой массив вместимостью `capacity` элементов.  
-- **`get_element_at_index(Integer index) -> ElementsType`**
-<br>Возвращает элемент с индексом `index`<sup>1</sup>.
-- **`set_element_at_index(Integer index, ElementsType element) -> None`**
-<br>Замещает объектом `element` элемент с индексом `index`<sup>1</sup>. 
-- **`size() -> Integer`**
-<br>Возвращает фактическую длину массива.
-- **`is_empty() -> Boolean`**
-<br>Возвращает `False` если в массиве содержатся элементы и `True`, если массив пустой.
+- **`init(Integer capacity) -> Array`** <br>Возвращает пустой массив вместимостью `capacity` элементов.  
+
+- **`get_element_at_index(Integer index) -> ElementsType`** <br>Возвращает элемент с индексом `index`<sup>1</sup>.
+
+- **`set_element_at_index(Integer index, ElementsType element) -> None`** <br>Замещает объектом `element` элемент с индексом `index`<sup>1</sup>.
+
+
+- **`size() -> Integer`**<br>Возвращает фактическую длину массива.
+
+- **`is_empty() -> Boolean`** <br>Возвращает `False` если в массиве содержатся элементы и `True`, если массив пустой.
 
 `ElementsType` &mdash; тип элементов, хранящихся в массиве.
 
-<sup>1</sup> Если `index < 0` или `index > capacity - 1`, где `capacity` &mdash; вместимость массива, выдается сообщение об ошибке. 
+<sup>1</sup> Если `index < 0` или `index > capacity - 1`, где `capacity` &mdash; вместимость массива, выдается сообщение об ошибке.
 
 ```{code-cell} ipython3
 ---
@@ -218,34 +216,27 @@ doctest.testmod()
 
 Улучшеный массив (Вектор) абстрактным типом данных, который подподдерживает следующие основные методы:
 
-- **`init(Integer capacity) -> Array`**
-<br>Возвращает пустой массив вместимостью `capacity` элементов.  
+- **`init(Integer capacity) -> Array`**<br>Возвращает пустой массив вместимостью `capacity` элементов.  
 
-- **`get_element_at_index(Integer index) -> ElementsType`**
-<br>Возвращает элемент с индексом `index`<sup>1</sup>.
+- **`get_element_at_index(Integer index) -> ElementsType`**<br>Возвращает элемент с индексом `index`<sup>1</sup>.
 
-- **`set_element_at_index(Integer index, ElementsType element) -> None`**
-<br>Замещает объектом `element` элемент с индексом `index`<sup>1</sup>.
+- **`set_element_at_index(Integer index, ElementsType element) -> None`**<br>Замещает объектом `element` элемент с индексом `index`<sup>1</sup>.
 
-- **`size() -> Integer`**
-<br>Возвращает фактическую длину массива.
+- **`size() -> Integer`**<br>Возвращает фактическую длину массива.
 
-- **`is_empty() -> Boolean`**
-<br>Возвращает `False` если в массиве содержатся элементы и `True`, если массив пустой.
+- **`is_empty() -> Boolean`**<br>Возвращает `False` если в массиве содержатся элементы и `True`, если массив пустой.
 
 <hr style="color:red">
 
-- **`insert_element_at_index(Integer index, ElementsType element) -> None`**
-<br>Добавляет в позицию `index`<sup>1</sup> массива новый элемент `element`. При этом все элементы начиная с `index` сдвигаются вправо
+- **`insert_element_at_index(Integer index, ElementsType element) -> None`**<br>Добавляет в позицию `index`<sup>1</sup> массива новый элемент `element`. При этом все элементы начиная с `index` сдвигаются вправо
 
-- **`remove_element_at_index(Integer index) -> None`**
-<br>Удаляет элемент с индексом `index`<sup>1</sup>. При этом все элементы начиная с `index + 1` сдвигаются влево 
+- **`remove_element_at_index(Integer index) -> None`**<br>Удаляет элемент с индексом `index`<sup>1</sup>. При этом все элементы начиная с `index + 1` сдвигаются влево 
 
 <hr style="color:red">
 
 `ElementsType` &mdash; тип элементов, хранящихся в массиве.
 
-<sup>1</sup> Если `index < 0` или `index > capacity - 1`, где `capacity` &mdash; вместимость массива, выдается сообщение об ошибке. 
+<sup>1</sup> Если `index < 0` или `index > capacity - 1`, где `capacity` &mdash; вместимость массива, выдается сообщение об ошибке.
 
 ```{code-cell} ipython3
 ---
@@ -335,48 +326,40 @@ doctest.testmod()
 | `remove_element_at_index` | $O(n)$ |
 
 При более детальном рассмотрении методов `insert_element_at_index(index, element)` и `remove_element_at_index(index)` можно определить, что время выполнения каждого из них равно $O(n - index + 1)$, так как в ходе исполнения программы перемещаются только элементы с индексом `index` и выше. 
-Таким образом, для добавления или удаления элемента в конце вектора с помощью методов `insert_element_at_index(index, element)` и `remove_element_at_index(index)` необходимо время $O(1)$.
+Таким образом, для добавления или удаления элемента в конце массива с помощью методов `insert_element_at_index(index, element)` и `remove_element_at_index(index)` необходимо время $O(1)$.
 
 +++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
 ## Расширяемый массив (Динамический массив) (Dynamic Array)
 
-Основной недостаток реализации вектора на основе простого массива, состоит в необходимости предварительногоуказания размера массива `capacity`, то есть максимального числа элементов веквектора. Если же действительное число элементов значительно меньше `capacity`,то при такой реализации бесполезно занимается место в памяти. Хужетого, если количестыо элементов (`size`) окажется больше значения `capacity`, то реализация приведет к сбою программы. 
+Основной недостаток простого массива, состоит в необходимости предварительного указания размера массива `capacity`, то есть его максимального числа элементов. Если же действительное число элементов значительно меньше `capacity`,то при такой реализации бесполезно занимается место в памяти. Хуже того, если количество элементов (`size`) окажется больше значения `capacity`, то реализация приведет к сбою программы. 
 
 Чтобы избежать этого, при возникновении переполнения, то есть при `capacity` = `size`, и вызове метода `insert_element_at_index` выполняются следующие операции:
 
 1) создается новый массив длиной `2 * capacity`;
 2) копируем все элементы из старого массива в новый.
 
-- **`init(Integer capacity) -> Array`**
-<br>Возвращает пустой массив вместимостью `capacity` элементов.
-<br>Если размер не задан, возвращает пустой массив с размером по умолчанию
+- **`init(Integer capacity) -> Array`** <br>Возвращает пустой массив вместимостью `capacity` элементов. <br>Если размер не задан, возвращает пустой массив с размером по умолчанию
  
-- **`get_element_at_index(Integer index) -> ElementsType`**
-<br>Возвращает элемент с индексом `index`<sup>1</sup>.
+- **`get_element_at_index(Integer index) -> ElementsType`**<br>Возвращает элемент с индексом `index`<sup>1</sup>.
 
-- **`set_element_at_index(Integer index, ElementsType element) -> None`**
-<br>Замещает объектом `element` элемент с индексом `index`<sup>1</sup>.
+- **`set_element_at_index(Integer index, ElementsType element) -> None`**<br>Замещает объектом `element` элемент с индексом `index`<sup>1</sup>.
 
-- **`size() -> Integer`**
-<br>Возвращает фактическую длину массива.
+- **`size() -> Integer`**<br>Возвращает фактическую длину массива.
 
-- **`is_empty() -> Boolean`**
-<br>Возвращает `False` если в массиве содержатся элементы и `True`, если массив пустой.
+- **`is_empty() -> Boolean`**<br>Возвращает `False` если в массиве содержатся элементы и `True`, если массив пустой.
 
 <hr style="color:red">
 
-- **`insert_element_at_index(Integer index, ElementsType element) -> None`**
-<br>Добавляет в позицию `index`<sup>1</sup> массива новый элемент `element`. При этом все элементы начиная с `index` сдвигаются вправо
+- **`insert_element_at_index(Integer index, ElementsType element) -> None`** <br>Добавляет в позицию `index`<sup>1</sup> массива новый элемент `element`. При этом все элементы начиная с `index` сдвигаются вправо
 
-- **`remove_element_at_index(Integer index) -> None`**
-<br>Удаляет элемент с индексом `index`<sup>1</sup>. При этом все элементы начиная с `index + 1` сдвигаются влево 
+- **`remove_element_at_index(Integer index) -> None`**<br>Удаляет элемент с индексом `index`<sup>1</sup>. При этом все элементы начиная с `index + 1` сдвигаются влево 
 
 <hr style="color:red">
 
 `ElementsType` &mdash; тип элементов, хранящихся в массиве.
 
-<sup>1</sup> Если `index < 0` или `index > capacity - 1`, где `capacity` &mdash; вместимость массива, выдается сообщение об ошибке. 
+<sup>1</sup> Если `index < 0` или `index > capacity - 1`, где `capacity` &mdash; вместимость массива, выдается сообщение об ошибке.
 
 ```{code-cell} ipython3
 ---
@@ -483,7 +466,7 @@ doctest.testmod()
 Попытка обращения к (n + 1)-му элементу массива размером n элементов немедленно вызовет аварийное завершение программы. Этот недостаток можно компенсировать объявлением массивов очень больших размеров, но это может повлечь за собой чрезмерные затраты памяти, что опять наложит ограничения на возможности программы.
 
 
-- **Высокая сложность вставки и удаления нового элемента**
+- **Высокая сложность вставки и удаления элементов**
   - Необходимо сдвинуть все элементы, чтобы освободить место для вставки
   - Необходимо заполнить пустые позиции после удаления
 
@@ -493,7 +476,7 @@ doctest.testmod()
 
 1. Методы `set_element_at_index(index, element)`, `insert_element_at_index(index, element)`, `remove_element_at_index(index, element)` могут возвращать заменяемый (при наличии) элемент.
 2. Метод `erase_element_at_index(Integer index) -> ItemsType`- Возвращает значение элемента в позиции `index` массива и СТИРАЕТ его.
-3. Метод `delete_element_at_index(Integer index) -> ItemsType`- Возвращает значение элемента в позиции `index` массива и УДАЛЯЕТ его. 
+3. Метод `delete_element_at_index(Integer index) -> ItemsType`- Возвращает значение элемента в позиции `index` массива и УДАЛЯЕТ его.
 
 +++ {"editable": true, "slideshow": {"slide_type": "slide"}}
 
